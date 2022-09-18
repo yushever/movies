@@ -1,4 +1,16 @@
 export default class GetMovies {
+  debounce(func, delay = 1000) {
+    let timeoutId;
+
+    return async function (...args) {
+      clearTimeout(timeoutId);
+
+      timeoutId = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  }
+
   async getResource(url) {
     const res = await fetch(url);
 
@@ -8,10 +20,18 @@ export default class GetMovies {
     const body = await res.json();
     return body;
   }
-  async getAllMovies() {
+
+  debounced = this.debounce(this.getResource);
+
+  async getAllMovies(searchInput) {
+    if (searchInput === null || searchInput === '') {
+      return [];
+    }
     const res = await this.getResource(
-      "https://api.themoviedb.org/3/search/movie?api_key=f0f65e607fe0520c21899abdded8460f&query=cat"
+      `https://api.themoviedb.org/3/search/movie?api_key=f0f65e607fe0520c21899abdded8460f&query=${searchInput}&page=1`
     );
+    // console.log(res);
+
     return res.results;
   }
 }

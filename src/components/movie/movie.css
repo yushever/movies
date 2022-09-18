@@ -27,9 +27,10 @@ li {
   font-size: 20px;
   line-height: 28px;
   margin-bottom: 7px;
+  margin-top: 7px;
 }
 .film__date {
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -48,14 +49,14 @@ li {
   background: #fafafa;
   border: 1px solid #d9d9d9;
   border-radius: 2px;
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
   margin-right: 8px;
   text-align: center;
-  padding-top: 5px;
+  padding-top: 2px;
 
   color: rgba(0, 0, 0, 0.65);
 }
@@ -63,9 +64,10 @@ li {
   width: 228px;
   height: 129px;
   border: none;
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 22px;
+  margin-top: 5px;
 }

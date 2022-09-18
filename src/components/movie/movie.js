@@ -1,6 +1,6 @@
-import "./movie.css";
-import React from "react";
-import { format } from "date-fns";
+import './movie.css';
+import React from 'react';
+import { format } from 'date-fns';
 
 class Movie extends React.Component {
   truncText(text) {
@@ -8,15 +8,19 @@ class Movie extends React.Component {
       return text;
     } else {
       text = text.substring(0, 215);
-      let lastSpace = text.lastIndexOf(" ");
-      return text.substring(0, lastSpace) + "...";
+      let lastSpace = text.lastIndexOf(' ');
+      return text.substring(0, lastSpace) + '...';
     }
   }
 
   render() {
     const { movie } = this.props;
     const urlPic = movie.poster_path;
-    const date = format(new Date(movie.release_date), "MMMM dd, yyyy");
+    let date;
+    if (movie.release_date != '') {
+      date = format(new Date(movie.release_date), 'MMMM dd, yyyy');
+    }
+
     return (
       <div className="film">
         <li className="film__item">

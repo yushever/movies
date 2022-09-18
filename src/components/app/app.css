@@ -1,0 +1,13 @@
+.container {
+}
+.error {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-left: auto !important; */
+  /* margin-right: auto !important; */
+}
+.ant-alert-error {
+  width: 250px !important;
+}
