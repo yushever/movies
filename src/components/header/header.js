@@ -1,9 +1,21 @@
 import './header.css';
 import React from 'react';
+import debounce from 'lodash.debounce';
 
 class HeaderSearch extends React.Component {
+  state = {
+    value: '',
+  };
+  debounceSearch = debounce((value) => this.props.updateSearchValue(value), 1000);
+
+  onValueChange = (e) => {
+    const value = e.target.value;
+    this.setState({ value });
+    this.debounceSearch(value);
+  };
+
   render() {
-    const { updateSearchValue, value } = this.props;
+    // const { updateSearchValue, value } = this.props;
     return (
       <div className="header">
         <div className="header__buttons">
@@ -12,8 +24,8 @@ class HeaderSearch extends React.Component {
         </div>
         <div className="header__search">
           <input
-            value={value}
-            onChange={(event) => updateSearchValue(event.target.value)}
+            value={this.state.value}
+            onChange={this.onValueChange}
             className="header__search-input"
             placeholder="Type to search..."
           ></input>
