@@ -24,6 +24,14 @@
 .ant-alert-error {
   width: 250px !important;
 }
+.warning {
+}
+.ant-alert-warning .ant-warning {
+  width: 300px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .ant-pagination {
   margin-left: auto !important;
   margin-right: auto !important;

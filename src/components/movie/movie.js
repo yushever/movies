@@ -9,7 +9,7 @@ class Movie extends React.Component {
     } else {
       text = text.substring(0, symbols + 5);
       let lastSpace = text.lastIndexOf(' ');
-      return text.substring(0, lastSpace) + '...';
+      return text.substring(0, lastSpace) + '..';
     }
   }
 
@@ -19,6 +19,16 @@ class Movie extends React.Component {
     let date;
     if (movie.release_date && movie.release_date != '') {
       date = format(new Date(movie.release_date), 'MMMM dd, yyyy');
+    }
+    let classNames = 'film__rate-circle';
+    if (movie.vote_average >= 7) {
+      classNames += ' rate-top';
+    } else if (movie.vote_average < 7 && movie.vote_average >= 5) {
+      classNames += ' rate-good';
+    } else if (movie.vote_average < 5 && movie.vote_average > 3) {
+      classNames += ' rate-medium';
+    } else if (movie.vote_average <= 0 && movie.vote_average > 3) {
+      classNames += ' rate-low';
     }
 
     return (
@@ -33,7 +43,12 @@ class Movie extends React.Component {
               ></img>
             </div>
             <div className="wrapper__info">
-              <h2 className="film__title">{this.truncText(movie.title, 20)}</h2>
+              <div className="wrapper__title">
+                <h2 className="film__title">{this.truncText(movie.title, 15)}</h2>
+                <div className={classNames}>
+                  <div className="film__rate">{movie.vote_average}</div>
+                </div>
+              </div>
               <span className="film__date">{date}</span>
               <ul className="film__genres">
                 <li className="film__genre">Action</li>

@@ -17,8 +17,12 @@ class MovieList extends React.Component {
         <Alert message="Упс" description="Что-то пошло не так..." type="error" showIcon />
       </div>
     ) : null;
+    const warning =
+      response.total_results == 0 ? (
+        <Alert message="Ой" description="Мы ничего не нашли! Попробуйте еще раз" type="warning" showIcon />
+      ) : null;
     const spinner = loading ? <Spin className="spinner" /> : null;
-    const content = hasData ? <MovieView movies={movies} /> : null;
+    const content = hasData && !warning ? <MovieView movies={movies} /> : null;
     const pagination =
       response.total_pages && response.total_pages > 1 ? (
         <Pagination total={response.total_results} defaultPageSize={20} showSizeChanger={false} onChange={onPage} />
@@ -28,6 +32,7 @@ class MovieList extends React.Component {
       <div className="film-content">
         <div className="films">
           {err}
+          {warning}
           {spinner}
           {content}
         </div>
