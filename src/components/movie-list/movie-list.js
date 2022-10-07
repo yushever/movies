@@ -7,7 +7,7 @@ import Movie from '../movie/movie';
 
 class MovieList extends React.Component {
   render() {
-    const { response, loading, error, onPage } = this.props;
+    const { response, loading, error, onPage, onStar } = this.props;
     const movies = response.results;
 
     const hasData = !(loading || error);
@@ -22,7 +22,7 @@ class MovieList extends React.Component {
         <Alert message="Ой" description="Мы ничего не нашли! Попробуйте еще раз" type="warning" showIcon />
       ) : null;
     const spinner = loading ? <Spin className="spinner" /> : null;
-    const content = hasData && !warning ? <MovieView movies={movies} /> : null;
+    const content = hasData && !warning ? <MovieView movies={movies} onStar={onStar} /> : null;
     const pagination =
       response.total_pages && response.total_pages > 1 ? (
         <Pagination total={response.total_results} defaultPageSize={20} showSizeChanger={false} onChange={onPage} />
@@ -42,14 +42,14 @@ class MovieList extends React.Component {
   }
 }
 
-const MovieView = ({ movies }) => {
+const MovieView = ({ movies, onStar }) => {
   if (!movies) {
     return null;
   }
   const elements = movies.map((movie) => {
     return (
       <div key={movie.id}>
-        <Movie movie={movie} />
+        <Movie movie={movie} onStar={onStar(movie.id)} />
       </div>
     );
   });

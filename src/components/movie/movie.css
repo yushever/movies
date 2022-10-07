@@ -8,6 +8,10 @@ li {
 .wrapper__info {
   margin-left: 20px;
 }
+.wrapper__image {
+  width: 183px;
+  height: 281px;
+}
 .film {
   width: 460px;
   height: 281px;
@@ -108,4 +112,7 @@ li {
   font-size: 12px;
   line-height: 22px;
   margin-top: 5px;
+}
+.ant-rate-star {
+  font-size: 17px;
 }

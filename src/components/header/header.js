@@ -15,24 +15,46 @@ class HeaderSearch extends React.Component {
   };
 
   render() {
-    // const { updateSearchValue, value } = this.props;
+    const { onRate, onSearch, search } = this.props;
     return (
       <div className="header">
         <div className="header__buttons">
-          <button className="header__button header__search-button">Search</button>
-          <button className="header__button header__rate-button">Rated</button>
+          <button className="header__button header__search-button" onClick={onSearch}>
+            Search
+          </button>
+          <button className="header__button header__rate-button" onClick={onRate}>
+            Rated
+          </button>
         </div>
-        <div className="header__search">
+        <SearchView search={search} value={this.state.value} onValueChange={this.onValueChange} />
+        {/* <div className="header__search">
           <input
             value={this.state.value}
             onChange={this.onValueChange}
             className="header__search-input"
             placeholder="Type to search..."
           ></input>
-        </div>
+        </div> */}
       </div>
     );
   }
 }
+
+const SearchView = ({ search, value, onValueChange }) => {
+  if (search) {
+    return (
+      <div className="header__search">
+        <input
+          value={value}
+          onChange={onValueChange}
+          className="header__search-input"
+          placeholder="Type to search..."
+        ></input>
+      </div>
+    );
+  } else {
+    return null;
+  }
+};
 
 export default HeaderSearch;

@@ -1,6 +1,7 @@
 import './movie.css';
 import React from 'react';
 import { format } from 'date-fns';
+import { Rate } from 'antd';
 
 class Movie extends React.Component {
   truncText(text, symbols) {
@@ -39,14 +40,14 @@ class Movie extends React.Component {
               <img
                 className="film__image"
                 src={`https://image.tmdb.org/t/p/original${urlPic}`}
-                alt={`${movie.title} banner`}
+                alt={`${movie.title}`}
               ></img>
             </div>
             <div className="wrapper__info">
               <div className="wrapper__title">
                 <h2 className="film__title">{this.truncText(movie.title, 15)}</h2>
                 <div className={classNames}>
-                  <div className="film__rate">{movie.vote_average}</div>
+                  <div className="film__rate">{movie.vote_average.toFixed(1)}</div>
                 </div>
               </div>
               <span className="film__date">{date}</span>
@@ -55,6 +56,7 @@ class Movie extends React.Component {
                 <li className="film__genre">Drama</li>
               </ul>
               <p className="film_overview">{this.truncText(movie.overview, 210)}</p>
+              <Rate count="10" allowHalf="true" value={movie.rating} onChange={this.props.onStar} />
             </div>
           </div>
         </li>
