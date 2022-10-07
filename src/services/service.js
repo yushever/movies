@@ -35,7 +35,7 @@ export default class GetMovies {
     const res = await this.getResource(
       `https://api.themoviedb.org/3/search/movie?api_key=${this.api_key}&query=${searchInput}&page=${page}`
     );
-    console.log(res);
+    // console.log(res);
 
     return res;
   }

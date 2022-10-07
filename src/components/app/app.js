@@ -7,6 +7,9 @@ import HeaderSearch from '../header/header';
 import GetMovies from '../../services/service';
 import NetworkState from '../network-state/network-state';
 
+const { Provider, Consumer } = React.createContext();
+export { Provider, Consumer };
+
 class App extends React.Component {
   getMovies = new GetMovies();
 
@@ -18,8 +21,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getMovies.getAllMoviesGuest().then((res) => console.log(res));
-    this.getMovies.getGenres().then((res) => console.log(res));
+    this.getMovies.getAllMoviesGuest();
+    this.getMovies.getGenres().then((res) => (this.genres = res));
   }
 
   state = {
@@ -81,7 +84,7 @@ class App extends React.Component {
 
   getStars = (id) => {
     return (e) => {
-      console.log(this.state.moviesData);
+      // console.log(this.state.moviesData);
       this.getMovies.sendRatingGuest(e, id);
       const idx = this.state.moviesData.results.findIndex((el) => el.id === id);
       const oldMovie = this.state.moviesData.results[idx];
@@ -92,18 +95,17 @@ class App extends React.Component {
         ...this.state.moviesData.results.slice(idx + 1),
       ];
       const newResult = { ...this.state.moviesData, results: newMovies };
-      console.log(newMovie);
+      // console.log(newMovie);
       this.setState(() => {
         return {
           moviesData: newResult,
         };
       });
-      console.log(`${id} - ${e}`);
+      // console.log(`${id} - ${e}`);
     };
   };
 
   onRate = () => {
-    console.log('rate');
     this.getMovies.showRatedMoviesGuest().then((movies) => {
       this.setState({
         moviesData: movies,
@@ -120,7 +122,6 @@ class App extends React.Component {
   };
 
   onSearch = () => {
-    console.log('search');
     this.updateMovie(this.state.searchValue);
     this.setState(() => {
       return {
@@ -138,31 +139,33 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <HeaderSearch
-          updateSearchValue={this.updateSearchValue}
-          value={this.state.searchValue}
-          search={this.state.isSearch}
-          rate={this.state.isRate}
-          onSearch={this.onSearch}
-          onRate={this.onRate}
-        />
-
-        <NetworkState onNetworkState={this.onNetworkState} />
-        {!this.state.network ? (
-          <div className="error">
-            <Alert message="Упс" description="Нет сети" type="error" showIcon />
-          </div>
-        ) : (
-          <MovieList
-            response={this.state.moviesData}
-            loading={this.state.loading}
-            error={this.state.error}
-            onPage={this.onPage}
-            onStar={this.getStars}
+      <Provider value={this.genres}>
+        <div className="container">
+          <HeaderSearch
+            updateSearchValue={this.updateSearchValue}
+            value={this.state.searchValue}
+            search={this.state.isSearch}
+            rate={this.state.isRate}
+            onSearch={this.onSearch}
+            onRate={this.onRate}
           />
-        )}
-      </div>
+
+          <NetworkState onNetworkState={this.onNetworkState} />
+          {!this.state.network ? (
+            <div className="error">
+              <Alert message="Упс" description="Нет сети" type="error" showIcon />
+            </div>
+          ) : (
+            <MovieList
+              response={this.state.moviesData}
+              loading={this.state.loading}
+              error={this.state.error}
+              onPage={this.onPage}
+              onStar={this.getStars}
+            />
+          )}
+        </div>
+      </Provider>
     );
   }
 }
