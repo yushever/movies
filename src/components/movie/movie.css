@@ -116,3 +116,35 @@ li {
 .ant-rate-star {
   font-size: 17px;
 }
+@media (max-width: 420px) {
+  .film {
+    width: 387px;
+    height: 245px;
+  }
+  .wrapper__image {
+    width: 60px;
+    /* height: 91px; */
+  }
+  .film__image {
+    width: 60px;
+    height: 91px;
+    margin-left: 10px;
+    margin-top: 6px;
+  }
+  .wrapper__info {
+    width: 300px;
+    height: 245px;
+  }
+  .film_overview {
+    padding-top: 10px;
+    width: 367px;
+    height: 92px;
+    transform: translateX(-67px);
+  }
+  .film__rate-circle {
+    right: 0px;
+  }
+  .ant-rate {
+    padding-left: 40px !important;
+  }
+}

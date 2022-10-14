@@ -54,3 +54,13 @@
 .ant-pagination::after {
   /* display: none; */
 }
+@media (max-width: 420px) {
+  .film-container {
+    width: auto;
+    margin-left: 1em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+}
