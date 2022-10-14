@@ -11,3 +11,8 @@
 .ant-alert-error {
   width: 250px !important;
 }
+@media (max-width: 420px) {
+  .container {
+    /* margin-left: 2em; */
+  }
+}
